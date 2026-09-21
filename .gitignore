@@ -1,0 +1,4 @@
+.ui-guard/
+__pycache__/
+node_modules/
+*.skill

@@ -1,0 +1,27 @@
+{
+  "_说明": "layout_check.cjs 读取 states；interaction_check.cjs 读取 states / overlays / submits。复制到项目根目录为 ui-guard.actions.json，按页面修改选择器。选择器支持 CSS、text=文字、role=button[name=保存] 等 Playwright 写法。",
+
+  "states": [
+    { "name": "default", "steps": [] },
+    { "name": "筛选后", "steps": [ { "fill": ["[name=keyword]", "fone bluetooth"] }, { "press": ["[name=keyword]", "Enter"] }, { "wait": 800 } ] },
+    { "name": "空结果", "steps": [ { "fill": ["[name=keyword]", "zzzz-sem-resultado"] }, { "press": ["[name=keyword]", "Enter"] }, { "wait": 800 } ] }
+  ],
+
+  "_overlays": "打开后检查：role/aria-modal、焦点移入、焦点陷阱、Esc、背景滚动锁定、焦点回到触发器、点外部关闭（popover）、打开动画时长",
+  "overlays": [
+    { "name": "新建订单弹窗", "trigger": "text=新建订单", "kind": "dialog" },
+    { "name": "状态下拉", "trigger": "[data-testid=status-select]", "kind": "popover" }
+  ],
+
+  "_submits": "拦截 api（返回模拟结果，不会写入真实后端）：检查即时 loading 反馈、重复提交、500 时的错误提示、失败后按钮恢复、未处理异常",
+  "submits": [
+    {
+      "name": "保存订单",
+      "steps": [ { "click": "text=新建订单" }, { "fill": ["[name=title]", "Pedido teste"] } ],
+      "trigger": "role=button[name=保存]",
+      "api": "**/api/orders**",
+      "method": "POST",
+      "mockBody": { "ok": true, "id": 1 }
+    }
+  ]
+}

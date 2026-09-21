@@ -1,0 +1,38 @@
+{
+  "_说明": "复制到项目根目录并命名为 ui-guard.config.json，按项目实际情况修改。以 _ 开头的字段是注释。",
+
+  "srcDirs": ["src"],
+  "componentDirs": ["src/components"],
+  "_primitiveDirs": "组件库自身的实现目录，允许在其中使用原生 button/input 等标签",
+  "primitiveDirs": ["src/components/ui"],
+  "legacyDirs": ["src/legacy", "src/components/old"],
+  "tokenFiles": ["src/styles/tokens.css", "src/styles/theme.css", "tailwind.config.js", "tailwind.config.ts"],
+
+  "_primitives": "原生标签 -> 应该使用的项目组件。静态检查会在业务代码中标记这些原生标签",
+  "primitives": {
+    "button": "Button",
+    "input": "Input",
+    "textarea": "Textarea",
+    "select": "Select",
+    "table": "Table",
+    "dialog": "Modal"
+  },
+
+  "_scrollbarClass": "全局滚动条样式类名；可滚动元素缺少它时会报告。没有就留空字符串",
+  "scrollbarClass": "app-scrollbar",
+  "_scrollbarMarker": "如果用 ScrollArea 之类组件，填一个它渲染出的 CSS 选择器（如 [data-radix-scroll-area-viewport]），渲染检查会接受它",
+  "scrollbarMarker": "",
+
+  "spacingScale": [0, 2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 80, 96],
+  "maxDistinctFontSizes": 7,
+  "zIndexAllowed": [0, 1, 2, 10, 100, 200, 300, 400, 500, 600, 700],
+
+  "dev": {
+    "_pages": "渲染检查的页面列表，name 用于报告文件名",
+    "pages": [
+      { "name": "home", "url": "http://localhost:5173/" }
+    ],
+    "widths": [360, 768, 834, 1280, 1440],
+    "height": 900
+  }
+}
